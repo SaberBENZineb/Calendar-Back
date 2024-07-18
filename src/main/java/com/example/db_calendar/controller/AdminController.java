@@ -61,4 +61,12 @@ public class AdminController {
         String jsonResponse = "{\"message\": \"Deleted\"}";
         return ResponseEntity.ok(jsonResponse);
     }
+
+    @DeleteMapping("/unassign/{eventId}/{userId}")
+    public ResponseEntity<String> unassign(@PathVariable Integer eventId,@PathVariable Integer userId)
+    {
+        eventService.unassign(eventId,userId);
+        String jsonResponse = "{\"message\": \"Deleted\"}";
+        return ResponseEntity.ok(jsonResponse);
+    }
 }

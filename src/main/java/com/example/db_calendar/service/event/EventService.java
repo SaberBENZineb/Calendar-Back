@@ -145,4 +145,18 @@ public class EventService {
         }
         return new ArrayList<>();
     }
+
+
+    public void unassign(Integer eventId,Integer userId){
+        Optional<Event> OptionalEvent = eventRepository.findById(eventId);
+        Optional<User> OptionalUser = userRepository.findById(userId);
+        if (OptionalUser.isPresent() && OptionalEvent.isPresent()) {
+            User user = OptionalUser.get();
+            Event event = OptionalEvent.get();
+            user.getAssignedEvents().remove(event);
+            event.getUsers().remove(user);
+            userRepository.save(user);
+            eventRepository.save(event);
+        }
+    }
 }
